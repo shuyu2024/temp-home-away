@@ -2,27 +2,36 @@ import CategoriesList from '@/components/home/CategoriesList';
 import PropertiesContainer from '@/components/home/PropertiesContainer';
 import LoadingCards from '@/components/card/LoadingCards';
 import { Suspense } from 'react';
-function HomePage({
-  searchParams,
-}: {
-  searchParams: { category?: string; search?: string };
-}) {
+
+type PageProps = {
+  searchParams: Promise<{
+    category?: string;
+    search?: string;
+  }>;
+};
+
+async function HomePage({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams; // Await the promise
+
   return (
     <section>
       <CategoriesList
-        category={searchParams?.category}
-        search={searchParams?.search}
+        category={resolvedSearchParams.category}
+        search={resolvedSearchParams.search}
       />
       <Suspense fallback={<LoadingCards />}>
         <PropertiesContainer
-          category={searchParams?.category}
-          search={searchParams?.search}
+          category={resolvedSearchParams.category}
+          search={resolvedSearchParams.search}
         />
       </Suspense>
     </section>
   );
 }
+
 export default HomePage;
+
+
 
 // 'use client';
 

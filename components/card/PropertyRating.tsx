@@ -2,13 +2,14 @@ import { FaStar } from 'react-icons/fa';
 // import { fetchPropertyRating } from '@/utils/actions';
 
 async function PropertyRating({
-//   propertyId,
+  propertyId,
   inPage,
 }: {
   propertyId: string;
   inPage: boolean;
 }) {
   // temp hard code
+  console.log(propertyId); // Suppress unused warning for now
   const rating = 4.7;
   const count = 100;
 

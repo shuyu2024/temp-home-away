@@ -62,6 +62,12 @@ function NavSearch() {
     return new URLSearchParams(searchParams.toString());
   }, [searchParams]);
 
+  useEffect(() => {
+    if (!stableSearchParams.get('search')) {
+      setSearch('');
+    }
+  }, [stableSearchParams]);
+
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(stableSearchParams);
     if (value) {
@@ -71,12 +77,6 @@ function NavSearch() {
     }
     replace(`${pathname}?${params.toString()}`);
   }, 300);
-
-  useEffect(() => {
-    if (!stableSearchParams.get('search')) {
-      setSearch('');
-    }
-  }, [stableSearchParams]);
 
   return (
     <Input

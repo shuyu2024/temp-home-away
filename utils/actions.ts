@@ -2,7 +2,7 @@
 
 import { profileSchema, propertySchema, validateWithZodSchema, imageSchema} from './schemas';
 import db from './db';
-import { auth, clerkClient, currentUser } from '@clerk/nextjs/server';
+import { clerkClient, currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { uploadImage } from './supabase';
